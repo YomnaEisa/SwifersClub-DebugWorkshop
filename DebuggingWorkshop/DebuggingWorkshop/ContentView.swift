@@ -5,39 +5,21 @@
 //  Created by Yomna Eisa on 08/01/2026.
 //
 
-/**
- 
- Counter doesn’t increase   ---->  Breakpoint + Step Through
- Red background sizing issue  ---->   View Debugger
- Index out of range  ---->   Crash + Stack Trace
- 
- */
 import SwiftUI
 
 struct DebuggingPlaygroundView: View {
     
     // State variables
     @State private var counter: Int = 0
-  //  @State private var username: String = ""
- //   @State private var isLoggedIn: Bool = false
+
     
     // Sample array for crash
     let numbers = [1, 2, 3]
     
     var body: some View {
         VStack(spacing: 30) {
-            
-            // MARK: - View Debugger Bug
-          
-                   // CORRECT CODE
-            
-//            Text("Welcome to Swifters \(username)")
-//                .font(.title)
-//                .padding()
-//                .foregroundStyle(Color.white)
-//                .background(Color.purple) // Background may look wrong in view debugger
-//                .cornerRadius(100)
-            
+                      
+
             // We have a corner radius and padding, why isn't showing?
             // Lets use View Debugger
             // Run your code, come back to Xcode and select the view debugger icon (3 layers stacked and pointing right)
@@ -47,17 +29,9 @@ struct DebuggingPlaygroundView: View {
                 .foregroundStyle(Color.white)
                 .background(Color.purple)
                 .padding()
-
-
-            
-//            TextField("Enter username", text: $username)
-//                .textFieldStyle(RoundedBorderTextFieldStyle())
-//                .padding(.horizontal)
-//
-            
+       
             Divider()
             
-            // MARK: - Counter Bug (Breakpoint)
             Button("Increase Counter") {
                 increaseCounter()
             }
@@ -67,7 +41,7 @@ struct DebuggingPlaygroundView: View {
             
             Divider()
             
-            // MARK: - Crash Buttons
+            // Crash Buttons
             VStack(spacing: 10) {
                 Button("Perfectly normal button, i am NOT evil App crashing button ") {
                     crashIndexOutOfRange()
@@ -75,19 +49,19 @@ struct DebuggingPlaygroundView: View {
             }
         }
         .padding()
+        
     }
     
-    // MARK: - Counter Bug (Breakpoint)
-    // here, we will use a breapoint to freeze the code in time at this point
-    func increaseCounter() {
+    // here, we will use a breakpoint to freeze the code in time at this point
+    func increaseCounter() { // add a breakpoint here
         counter = counter + 1 // Lets try po counter in the consle
         counter = counter - 1 // counter never actually increases
     }
     
     
-    // MARK: - Crash Functions
+    // Crash Functions
     func crashIndexOutOfRange() {
-        let value = numbers[5] // Index out of range
+        let value = numbers[5] // Index out of range causing a crash
         print(value)
     }
     
