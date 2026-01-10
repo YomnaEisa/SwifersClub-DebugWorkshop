@@ -10,61 +10,67 @@ import SwiftUI
 struct DebuggingPlaygroundView: View {
     
     // State variables
-    @State private var counter: Int = 0
+    @State private var counter: Int = 3
+    @State private var items: [String]? = ["Worm 🪱", "LadyBug 🐞", "Beatle 🪲"]
 
-    
-    // Sample array for crash
-    let numbers = [1, 2, 3]
-    
     var body: some View {
         VStack(spacing: 30) {
-                      
+            
+            // VIEW DEBUGGER BUG
+            // One view exists but is hidden behind another
+            // Use View Debugger to discover it
+            ZStack {
+                Text("I should be visible 🐛")
+                    .font(.title)
+                    .padding()
+                    .background(Color.green)
+                
+                Text("I am covering the other text")
+                    .font(.title)
+                    .padding()
+                    .background(Color.red)
+            }
 
-            // We have a corner radius and padding, why isn't showing?
-            // Lets use View Debugger
-            // Run your code, come back to Xcode and select the view debugger icon (3 layers stacked and pointing right)
-            Text("Welcome to Swifters")
-                .font(.title)
-                .cornerRadius(100)
-                .foregroundStyle(Color.white)
-                .background(Color.purple)
-                .padding()
-       
             Divider()
             
-            Button("Increase Counter") {
+            Button("Increase Bug Counter") {
                 increaseCounter()
             }
             
-            Text("Counter: \(counter)")
-            
+            Text("Bug Counter: \(counter)")
             
             Divider()
             
-            // Crash Buttons
-            VStack(spacing: 10) {
-                Button("Perfectly normal button, i am NOT evil App crashing button ") {
-                    crashIndexOutOfRange()
+            // List Section
+            Text("Bugs List")
+                .font(.headline)
+            List {
+                ForEach(items ?? [], id: \.self) { item in
+                    Text(item)
                 }
+            }
+            .frame(height: 230)
+            .cornerRadius(10)
+            
+            
+            // Crash Button
+            Button("Perfectly normal button, i am NOT evil App crashing button") {
+                crashIndexOutOfRange()
             }
         }
         .padding()
-        
     }
     
-    // here, we will use a breakpoint to freeze the code in time at this point
-    func increaseCounter() { // add a breakpoint here
-        counter = counter + 1 // Lets try po counter in the consle
-        counter = counter - 1 // counter never actually increases
+    // BREAKPOINT DEBUGGING
+    func increaseCounter() { // add breakpoint here, and step
+        counter += 2 // use PO counter in the console to see the update
     }
     
-    
-    // Crash Functions
+    // CRASH DEBUGGING
     func crashIndexOutOfRange() {
-        let value = numbers[5] // Index out of range causing a crash
-        print(value)
+        let value = items?[3] // index out of range causes a crash
+        print(value!)
     }
-    
 }
 
 #Preview {
