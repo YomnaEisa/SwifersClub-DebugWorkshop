@@ -1,5 +1,5 @@
 ## Debugging tools in Xcode Workshop #
-This SwiftUI project is designed as a hands-on debugging playground for the Swifter Club at Apple Developer Academy @ TWUIQ. It contains multiple intentional bugs and crashes, allowing learners to practice different debugging techniques in Xcode:
+This SwiftUI project is designed as a hands-on debugging playground for the Swifter Club at Apple Developer Academy @ TUWAIQ. It contains multiple intentional bugs and crashes, allowing learners to practice different debugging techniques in Xcode:
 
 - Breakpoint debugging
 - View Debugger inspection
